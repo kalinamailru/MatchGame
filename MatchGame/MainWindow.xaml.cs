@@ -43,24 +43,31 @@ namespace MatchGame
 
         private void SetUpGame()
         {
-            List<String> animalEmoji = new List<String>()
+            var listEmoji = new List<String>()
             {
-                "🐙","🐙",
-                "🦨","🦨",
-                "🐘","🐘",
-                "🐳","🐳",
-                "🐫","🐫",
-                "🦕","🦕",
-                "🦘","🦘",
-                "🦔","🦔"
+                "🐒", "🦍", "🦧", "🦮", "🐕", "‍🦺", "🐩", "🐕", "🐈", "🐅", "🐆", "🐎", "🦌",
+                "🦏", "🦛", "🐂", "🐃", "🐄", "🐖", "🐏", "🐑", "🐐", "🐪", "🐫", "🦙", "🦘",
+                "🦥", "🦨", "🦡", "🐘", "🐁", "🐀", "🦔", "🐇", "🐿", "🦎", "🐊", "🐢", "🐍",
+                "🐉", "🦕", "🦖", "🦦", "🦈", "🐬", "🐳", "🐋", "🐟", "🐠", "🐡", "🦐", "🦑",
+                "🐙", "🦞", "🦀", "🦆", "🐓", "🦃", "🦅", "🕊", "🦢", "🦜", "🦩", "🦚", "🦉",
+                "🐦", "🐧", "🐥", "🦇", "🦋", "🐌", "🐛", "🦟", "🦗", "🐜", "🐝", "🐞", "🦂", "🕷",
             };
 
             Random random = new Random();
+            List<String> animalEmoji = new List<String>();
+            for (int i = 0; i < 8; i++)
+            {
+                int index = random.Next(listEmoji.Count);
+                animalEmoji.Add(listEmoji[index]);
+                animalEmoji.Add(listEmoji[index]);
+                listEmoji.RemoveAt(index);
+            }
 
             foreach (TextBlock textBlock in mainGrid.Children.OfType<TextBlock>())
             {
                 if (textBlock.Name != "timeTextBlock")
                 {
+                    textBlock.Visibility = Visibility.Visible;
                     int index = random.Next(animalEmoji.Count);
                     string nextEmoji = animalEmoji[index];
                     textBlock.Text = nextEmoji;
